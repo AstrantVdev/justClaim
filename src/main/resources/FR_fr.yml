@@ -1,0 +1,6 @@
+m:
+  er:
+    town:
+      alreadyExists: Cette Ville existe déjà !
+    human:
+      hasNoTown: Tu as besoin d'être dans une ville pour faire ca !

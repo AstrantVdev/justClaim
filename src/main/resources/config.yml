@@ -1,0 +1,136 @@
+config:
+  townDefaultConfig:
+    plots:
+      PlotPerms:
+        outsiders:
+          b: false
+          s: false
+          c: false
+          d: false
+        citizens:
+          b: false
+          s: false
+          c: false
+          d: false
+        allies:
+          b: false
+          s: false
+          c: false
+          d: false
+    upkeep: 0
+decay: 0M
+Town:
+  name: string
+  chief: member
+  center : plot
+  rule : rule
+  members:
+    - member
+  rules:
+    - rule
+  roles:
+    - role
+  subplots:
+    - subplot
+  plots:
+    - plot
+
+Members:
+  uuid:
+    towns:
+      - town
+
+rule:
+  superior: 32
+  inferior: 32
+  yesBetween:
+    - [35,37]
+  noBetween:
+      - [35,37]
+  yes:
+    - 35
+  no:
+    - 36
+  pvp: no
+  build:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  destroy:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  blockInteract:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  flow:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  grow:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  blockFormation:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  fade:
+    default: no
+    yes:
+      - Material
+    no:
+      - Material
+  entityInteract:
+    default: no
+    yes:
+      entity:
+        - Entity
+    no:
+      entity:
+        - Entity
+  entityAttack:
+    default: no
+    yes:
+      entity:
+        - Entity
+    no:
+      entity:
+        - Entity
+role:
+  chief:64
+
+Plot:
+  key: #"x/y"
+  subPlots:
+    - subPlot
+  rules:
+    - rule
+  world: World
+
+
+subPlot:
+  type: type
+  yesSubPlots:
+    - subPlot
+  noSubPlots:
+    - subPlot
+  yesBlocks:
+    - location
+  noBlocks:
+    - location
+  rules:
+    - rule

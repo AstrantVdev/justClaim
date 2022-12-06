@@ -1,0 +1,11 @@
+name: CommandManager
+version: '${project.version}'
+main: fr.astrantv.justClaim.Main
+api-version: 1.19
+authors: [ astrantv ]
+description: handler for commands
+website: Asra#1053
+commands:
+  foxy:
+    description: What a cuty fox, isn't it ? :3
+    permission: CommandHandler.foxy
