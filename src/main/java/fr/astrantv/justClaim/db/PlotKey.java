@@ -9,9 +9,12 @@ import java.util.UUID;
 import static fr.astrantv.justClaim.Main.plugin;
 
 public class PlotKey {
-    public int X;
-    public int Z;
-    public UUID worldUUID;
+    private int X;
+    private int Z;
+    private UUID worldUUID;
+
+    private PlotKey alphaPlot;
+
 
     public PlotKey(){
 
@@ -21,6 +24,12 @@ public class PlotKey {
         X = loc.getChunk().getX();
         Z = loc.getChunk().getZ();
         worldUUID = loc.getWorld().getUID();
+    }
+
+    public PlotKey(int X, int Z, UUID worldUUID){
+        this.X = X;
+        this.Z = Z;
+        this.worldUUID = worldUUID;
     }
 
     public int getX() {
@@ -56,7 +65,7 @@ public class PlotKey {
             for(int z = Z-1;z<Z+2; z+=2){
                 PlotKey near = new PlotKey(new Location(w, X, 2, Z));
 
-                if(t.plotsKeys.contains(near)){
+                if(t.getPlotsKeys().contains(near)){
                     nears.add(near);
                 }
 

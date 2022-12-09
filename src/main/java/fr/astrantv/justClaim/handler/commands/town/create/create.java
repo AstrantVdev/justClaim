@@ -1,14 +1,13 @@
 package fr.astrantv.justClaim.handler.commands.town.create;
 
 import fr.astrantv.justClaim.Error;
-import fr.astrantv.justClaim.db.Member;
-import fr.astrantv.justClaim.db.Plot;
-import fr.astrantv.justClaim.db.PlotKey;
-import fr.astrantv.justClaim.db.Town;
+import fr.astrantv.justClaim.db.*;
 import fr.astrantv.justClaim.handler.Arg;
 import fr.astrantv.justClaim.handler.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class create extends SubCommand {
 
@@ -31,20 +30,22 @@ public class create extends SubCommand {
         Town town = new Town(args[0]);
         Player p = (Player) sender;
 
-        if(!town.isRegistered()){
-            Member chief = new Member(p.getUniqueId());
+        if(!town.IsRegistered()){
+            UUID uuid = p.getUniqueId();
+            Member member = new Member(uuid);
             Plot plot = new Plot(p.getLocation());
             PlotKey plotKey = new PlotKey(p.getLocation());
 
-            if(!plot.isRegistered()){
-                town.setChiefUUID(chief.getUuid());
-                town.membersUUID.add(chief.getUuid());
-                town.setCenter(plotKey);
-                town.plotsKeys.add(plotKey);
+            if(!plot.IsRegistered()){
+                MemberInTown mInTown = new MemberInTown();
+                mInTown.addRole(town.leaderRole());
+                town.addMemberInTown(mInTown);
+                town.addAlphaPlot(plotKey);
+                town.addPlotKey(plotKey);
                 town.register();
 
-                chief.townsNames.add(args[0]);
-                chief.register();
+                member.addTownName(town.getName());
+                member.register();
 
                 plot.register();
             }

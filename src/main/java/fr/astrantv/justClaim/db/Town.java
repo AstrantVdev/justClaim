@@ -10,10 +10,10 @@ import static fr.astrantv.justClaim.Main.mongoD;
 
 public class Town {
     private String name;
-    private UUID chiefUUID;
-    private PlotKey center;
     private Rule rule;
-    private ArrayList<UUID> membersUUID = new ArrayList<>();
+    private ArrayList<PlotKey> alphaPlots = new ArrayList<>();
+
+    private ArrayList<MemberInTown> membersInTown = new ArrayList<>();
     private ArrayList<Rule> rules = new ArrayList<>();
     private ArrayList<Role> roles = new ArrayList<>();
     private ArrayList<SubPlot> subPlots = new ArrayList<>();
@@ -25,6 +25,7 @@ public class Town {
 
     public Town(String name) {
         this.name = name;
+
     }
 
     public String getName() {
@@ -35,22 +36,6 @@ public class Town {
         this.name = name;
     }
 
-    public UUID getChiefUUID() {
-        return chiefUUID;
-    }
-
-    public void setChiefUUID(UUID chiefUUID) {
-        this.chiefUUID = chiefUUID;
-    }
-
-    public PlotKey getCenter() {
-        return center;
-    }
-
-    public void setCenter(PlotKey center) {
-        this.center = center;
-    }
-
     public Rule getRule() {
         return rule;
     }
@@ -59,20 +44,44 @@ public class Town {
         this.rule = rule;
     }
 
-    public ArrayList<UUID> getMembersUUID() {
-        return membersUUID;
+    public ArrayList<PlotKey> getAlphaPlots() {
+        return alphaPlots;
     }
 
-    public void setMembersUUID(ArrayList<UUID> members) {
-        this.membersUUID = members;
+    public void setAlphaPlots(ArrayList<PlotKey> alphaPlots) {
+        this.alphaPlots = alphaPlots;
     }
 
-    public void addMemberUUID(UUID uuid){
-        membersUUID.add(uuid);
+    public void addAlphaPlot(PlotKey alphaPlot) {
+        alphaPlots.add(alphaPlot);
     }
 
-    public void removeMemberUUID(UUID uuid){
-        membersUUID.remove(uuid);
+    public void removeAlphaPlot(PlotKey alphaPlot) {
+        alphaPlots.remove(alphaPlot);
+    }
+
+    public boolean hasAlphaPlot(PlotKey alphaPlot) {
+        return alphaPlots.contains(alphaPlot);
+    }
+
+    public ArrayList<MemberInTown> getMembersInTown() {
+        return membersInTown;
+    }
+
+    public void setMembersInTown(ArrayList<MemberInTown> membersInTown) {
+        this.membersInTown = membersInTown;
+    }
+
+    public void addMemberInTown(MemberInTown memberInTown){
+        membersInTown.add(memberInTown);
+    }
+
+    public void removeMemberInTown(MemberInTown memberInTown){
+        membersInTown.remove(memberInTown);
+    }
+
+    public boolean hasMemberInTown(MemberInTown memberInTown){
+        return membersInTown.contains(memberInTown);
     }
 
     public ArrayList<Rule> getRules() {
@@ -87,8 +96,12 @@ public class Town {
         rules.add(rule);
     }
 
-    public void remobveRule(Rule rule){
+    public void removeRule(Rule rule){
         rules.remove(rule);
+    }
+
+    public boolean hasRule(Rule rule){
+        return rules.contains(rule);
     }
 
     public ArrayList<Role> getRoles() {
@@ -107,6 +120,10 @@ public class Town {
         roles.remove(role);
     }
 
+    public boolean hasRole(Role role){
+        return roles.contains(role);
+    }
+
     public ArrayList<SubPlot> getSubPlots() {
         return subPlots;
     }
@@ -121,6 +138,10 @@ public class Town {
 
     public void removeSubPlot(SubPlot subPlot){
         subPlots.remove(subPlot);
+    }
+
+    public boolean hasSubPlot(SubPlot subPlot){
+        return subPlots.contains(subPlot);
     }
 
     public ArrayList<PlotKey> getPlotsKeys() {
@@ -139,6 +160,10 @@ public class Town {
         plotsKeys.remove(plotKey);
     }
 
+    public boolean hasPlotKey(PlotKey plotKey){
+        return plotsKeys.contains(plotKey);
+    }
+
     public boolean IsRegistered(){
         MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
         return towns.find(eq("name",name)).first() != null;
@@ -146,10 +171,15 @@ public class Town {
     }
 
     public void register(){
-        MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
+        unRegister();
 
-        towns.deleteOne(eq("name",name));
+        MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
         towns.insertOne(this);
+    }
+
+    public void unRegister(){
+        MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
+        towns.deleteOne(eq("name",name));
     }
 
     public ArrayList<Plot> GetPlots(){
@@ -164,12 +194,22 @@ public class Town {
 
     public ArrayList<Member> GetMembers(){
         ArrayList<Member> members = new ArrayList<>();
-        for (UUID uuid : membersUUID){
-            Member m = new Member(uuid);
+        for (MemberInTown member : membersInTown){
+            Member m = new Member(member.getUuid());
+            m = m.GetMemberFromDb();
             members.add(m);
         }
 
         return members;
+    }
+
+    public MemberInTown getMemberInTown(Member member){
+        for(Member m : GetMembers()){
+            if(m.getUuid().equals(member.getUuid())){
+                return membersInTown.get(GetMembers().indexOf(m));
+            }
+        }
+        return null;
     }
 
     public enum NAMEERROR{
@@ -197,6 +237,21 @@ public class Town {
 
         }
 
+    }
+
+    public Role leaderRole(){
+        Role r = new Role("leader", 64);
+        for(Role.PERM p : Role.PERM.values()){
+            r.addPermission(p);
+        }
+
+        return r;
+
+    }
+
+    public Town GetTownFromDb(){
+        MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
+        return towns.find(eq("name",name)).first();
     }
 
 }

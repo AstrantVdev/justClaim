@@ -12,13 +12,12 @@ import static com.mongodb.client.model.Filters.eq;
 import static fr.astrantv.justClaim.Main.mongoD;
 
 public class Plot {
-    public int X;
-    public int Z;
-    public UUID worldUUID;
-    public String townName;
-    public ArrayList<SubPlot> subPlots = new ArrayList<>();
-    public ArrayList<Rule> rules = new ArrayList<>();
-    private MongoCollection<Plot> plots;
+    private int X;
+    private int Z;
+    private UUID worldUUID;
+    private String townName;
+    private ArrayList<SubPlot> subPlots = new ArrayList<>();
+    private ArrayList<Rule> rules = new ArrayList<>();
 
     public Plot() {
     }
@@ -28,16 +27,12 @@ public class Plot {
         Z = loc.getChunk().getZ();
         worldUUID = loc.getWorld().getUID();
 
-        plots = mongoD.getCollection("plots", Plot.class);
-
     }
 
     public Plot(UUID worldUuid, int X, int Z) {
         this.worldUUID = worldUuid;
         this.X = X;
         this.Z = Z;
-
-        plots = mongoD.getCollection("plots", Plot.class);
 
     }
 
@@ -90,7 +85,8 @@ public class Plot {
     }
 
 
-    public boolean isRegistered(){
+    public boolean IsRegistered(){
+        MongoCollection<Plot> plots = mongoD.getCollection("plots", Plot.class);
         return plots.find(and(
                 eq("X",X),
                 eq("Z",Z),
@@ -98,27 +94,39 @@ public class Plot {
 
     }
 
-    public void register(){
+    public void unRegister(){
+        MongoCollection<Plot> plots = mongoD.getCollection("plots", Plot.class);
+
         plots.deleteOne(and(
                 eq("X",X),
                 eq("Z",Z),
                 eq("world",worldUUID)));
+    }
+
+    public void register(){
+        unRegister();
+
+        MongoCollection<Plot> plots = mongoD.getCollection("plots", Plot.class);
         plots.insertOne(this);
     }
 
 
-    public Town getTown() {
+    public Town GetTown() {
         return new Town(townName);
     }
 
-    public ArrayList<PlotKey> broooooookTownIntegrityCheck(PlotKey plot, ArrayList<PlotKey> checkingPlots){
+    public PlotKey GetPlotKey() {
+        return new PlotKey(X, Z, worldUUID);
+    }
+
+    public ArrayList<PlotKey> townIntegrityPlots(PlotKey plot, ArrayList<PlotKey> checkingPlots){
         Town t = new Town(townName);
 
         for(PlotKey p : plot.getNears(t)){
 
             if(checkingPlots.contains(p)){
                 checkingPlots.remove(p);
-                broooooookTownIntegrityCheck(p, checkingPlots);
+                townIntegrityPlots(p, checkingPlots);
 
             }
 
@@ -129,15 +137,21 @@ public class Plot {
     }
 
     //would make a portion of the town unattached to it.
-    public boolean BronhnIntegrity(){
+    public boolean IsBreakingTownIntegrity(){
         Town t = new Town(townName);
         ArrayList<PlotKey> checkingPlots = t.getPlotsKeys();
         PlotKey center = t.getCenter();
 
-        checkingPlots = broooooookTownIntegrityCheck(center, checkingPlots);
+        checkingPlots = townIntegrityPlots(center, checkingPlots);
 
         return checkingPlots.size() != 0;
 
+    }
+
+    public boolean IsAlpha(){
+        Town t = GetTown();
+        PlotKey p = GetPlotKey();
+        return t.hasAlphaPlot(p);
     }
 
     public boolean playerHasPermToBlockInteract(Player p, Location loc){
@@ -149,4 +163,11 @@ public class Plot {
         return false;
     }
 
+    public Plot GetPlotFromDb() {
+        MongoCollection<Plot> plots = mongoD.getCollection("plots", Plot.class);
+        return plots.find(and(
+                eq("X",X),
+                eq("Z",Z),
+                eq("world",worldUUID))).first();
+    }
 }

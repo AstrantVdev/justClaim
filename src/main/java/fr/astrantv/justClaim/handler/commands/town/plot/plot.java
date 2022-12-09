@@ -1,6 +1,6 @@
 package fr.astrantv.justClaim.handler.commands.town.plot;
 
-import fr.astrantv.justClaim.handler.commands.town.plot.claim.claim;
+import fr.astrantv.justClaim.handler.commands.town.plot.add.add;
 import org.bukkit.command.CommandSender;
 import fr.astrantv.justClaim.handler.SubCommand;
 
@@ -11,7 +11,7 @@ public class plot extends SubCommand {
         name = "plot";
         desc = "A command to manage a plot";
 
-        subCommands.add(new claim(sender));
+        subCommands.add(new add(sender));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package fr.astrantv.justClaim.handler.commands.town.plot.claim;
+package fr.astrantv.justClaim.handler.commands.town.plot.add;
 import fr.astrantv.justClaim.Error;
 import fr.astrantv.justClaim.db.Member;
 import fr.astrantv.justClaim.db.Plot;
@@ -10,12 +10,12 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class claim extends SubCommand {
+public class add extends SubCommand {
 
-    public claim(CommandSender sender) {
+    public add(CommandSender sender) {
         super(sender);
-        name = "claim";
-        desc = "A command to claim a plot";
+        name = "add";
+        desc = "A command to add a plot";
 
         Player p = (Player) sender;
         Member m = new Member(p.getUniqueId());
@@ -25,7 +25,7 @@ public class claim extends SubCommand {
             town.minChr = 2;
             town.maxChr = 32;
             town.required = false;
-            town.choices = m.getTowns();
+            town.choices = m.GetTowns();
             args.add(town);
 
         }
@@ -41,17 +41,19 @@ public class claim extends SubCommand {
             Location loc = p.getLocation();
             Plot plot = new Plot(loc);
 
-            if(!plot.isRegistered()){
+            if(!plot.IsRegistered()){
                 PlotKey plotKey = new PlotKey(loc);
 
                 String townName = m.getTownsNames().get(0);
                 if(args.length == 1){
                     townName = args[0];
                 }
+
                 Town town = new Town(townName);
+                town = town.GetTownFromDb();
 
                 if(plotKey.getNears(town) != null){
-                    town.plotsKeys.add(plotKey);
+                    town.addPlotKey(plotKey);
                     town.register();
 
                     plot.register();

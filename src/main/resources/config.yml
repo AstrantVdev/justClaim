@@ -21,7 +21,6 @@ config:
 decay: 0M
 Town:
   name: string
-  chief: member
   center : plot
   rule : rule
   members:
@@ -134,3 +133,17 @@ subPlot:
     - location
   rules:
     - rule
+
+perms: #limit per day
+  - plotAdd: int
+  - plotRemove: int
+  - moneyAdd: int
+  - moneyRemove: int
+  - memberAdd: int
+  - memberRemove: int
+  - roleAdd: int
+  - roleRemove: int
+  - ruleAdd: int #be sure member has perm in subPlot !!!
+  - ruleRemove: int
+  - subPlotAdd: int
+  - subPlotRemove: int

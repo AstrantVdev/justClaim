@@ -18,12 +18,12 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
             Player p = e.getPlayer();
             Member m = new Member(p.getUniqueId());
-            Town plotTown = plot.getTown();
+            Town plotTown = plot.GetTown();
 
-            if(plotTown.membersUUID.contains(m.getUuid())){
+            if(plotTown.getMembersUUID().contains(m.getUuid())){
 
             }
 
@@ -38,7 +38,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -49,7 +49,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -60,7 +60,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getSourceBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -71,7 +71,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getToBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -82,7 +82,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -93,7 +93,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -104,7 +104,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -115,7 +115,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getEntity().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 
@@ -126,7 +126,7 @@ public class PlotProtectionListener implements Listener{
         Location loc = e.getBlock().getLocation();
         Plot plot = new Plot(loc);
 
-        if(plot.isRegistered()){
+        if(plot.IsRegistered()){
 
         }
 

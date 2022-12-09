@@ -10,20 +10,17 @@ import static fr.astrantv.justClaim.Main.mongoD;
 
 public class Member {
     private UUID uuid;
-    public ArrayList<String> townsNames = new ArrayList<>();
-    private MongoCollection<Member> members;
+    private ArrayList<String> townsNames = new ArrayList<>();
 
     public Member(){
     }
+
     public Member(UUID uuid){
         this.uuid = uuid;
-        members = mongoD.getCollection("members", Member.class);
-
     }
 
     public UUID getUuid() {
         return uuid;
-
     }
 
     public void setUuid(UUID uuid) {
@@ -38,18 +35,34 @@ public class Member {
         this.townsNames = townsNames;
     }
 
-    public boolean isRegistered(){
+    public void addTownName(String townName){
+        townsNames.add(townName);
+    }
+
+    public void removeTownName(String townName){
+        townsNames.remove(townName);
+    }
+
+    public boolean IsRegistered(){
+        MongoCollection<Member> members = mongoD.getCollection("members", Member.class);
         return members.find(eq("uuid",uuid)).first() != null;
 
     }
 
-    public void register(){
+    public void unRegister(){
+        MongoCollection<Member> members = mongoD.getCollection("members", Member.class);
         members.deleteOne(eq("uuid",uuid));
+    }
+
+    public void register(){
+        unRegister();
+
+        MongoCollection<Member> members = mongoD.getCollection("members", Member.class);
         members.insertOne(this);
     }
 
 
-    public ArrayList<Town> getTowns(){
+    public ArrayList<Town> GetTowns(){
         ArrayList<Town> towns = new ArrayList<>();
         for (String name : townsNames){
             Town t = new Town(name);
@@ -66,5 +79,9 @@ public class Member {
         return townsNames.contains(townName);
     }
 
+    public Member GetMemberFromDb(){
+        MongoCollection<Member> members = mongoD.getCollection("members", Member.class);
+        return members.find(eq("uuid",uuid)).first();
+    }
 
 }
