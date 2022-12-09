@@ -36,6 +36,13 @@ public class Plot {
 
     }
 
+    public Plot(PlotKey plotKey) {
+        this.worldUUID = plotKey.getWorldUUID();
+        this.X = plotKey.getX();
+        this.Z = plotKey.getZ();
+
+    }
+
     public int getX() {
         return X;
     }
@@ -139,10 +146,12 @@ public class Plot {
     //would make a portion of the town unattached to it.
     public boolean IsBreakingTownIntegrity(){
         Town t = new Town(townName);
-        ArrayList<PlotKey> checkingPlots = t.getPlotsKeys();
-        PlotKey center = t.getCenter();
+        PlotSection section = t.GetPlotSection(GetPlotKey());
 
-        checkingPlots = townIntegrityPlots(center, checkingPlots);
+        ArrayList<PlotKey> checkingPlots = section.getPlotsKeys();
+        PlotKey alpha = section.getAlphaPlot();
+
+        checkingPlots = townIntegrityPlots(alpha, checkingPlots);
 
         return checkingPlots.size() != 0;
 

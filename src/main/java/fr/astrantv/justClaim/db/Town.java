@@ -3,7 +3,6 @@ package fr.astrantv.justClaim.db;
 import com.mongodb.client.MongoCollection;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static com.mongodb.client.model.Filters.eq;
 import static fr.astrantv.justClaim.Main.mongoD;
@@ -11,6 +10,7 @@ import static fr.astrantv.justClaim.Main.mongoD;
 public class Town {
     private String name;
     private Rule rule;
+    private double money;
     private ArrayList<PlotKey> alphaPlots = new ArrayList<>();
 
     private ArrayList<MemberInTown> membersInTown = new ArrayList<>();
@@ -42,6 +42,14 @@ public class Town {
 
     public void setRule(Rule rule) {
         this.rule = rule;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public ArrayList<PlotKey> getAlphaPlots() {
@@ -181,12 +189,12 @@ public class Town {
         MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
         towns.deleteOne(eq("name",name));
     }
-
     public ArrayList<Plot> GetPlots(){
         ArrayList<Plot> plots = new ArrayList<>();
-        for (PlotKey key : plotsKeys){
-            Plot p = new Plot(key.worldUUID, key.X, key.Z);
-            plots.add(p);
+
+        for(PlotKey key : getPlotsKeys()){
+            plots.add(new Plot(key));
+
         }
 
         return plots;
@@ -203,7 +211,7 @@ public class Town {
         return members;
     }
 
-    public MemberInTown getMemberInTown(Member member){
+    public MemberInTown GetMemberInTown(Member member){
         for(Member m : GetMembers()){
             if(m.getUuid().equals(member.getUuid())){
                 return membersInTown.get(GetMembers().indexOf(m));

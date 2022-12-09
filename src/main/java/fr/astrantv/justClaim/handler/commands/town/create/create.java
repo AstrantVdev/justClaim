@@ -40,6 +40,7 @@ public class create extends SubCommand {
                 MemberInTown mInTown = new MemberInTown();
                 mInTown.addRole(town.leaderRole());
                 town.addMemberInTown(mInTown);
+                plotKey.setAlphaPlotName("alpha");
                 town.addAlphaPlot(plotKey);
                 town.addPlotKey(plotKey);
                 town.register();

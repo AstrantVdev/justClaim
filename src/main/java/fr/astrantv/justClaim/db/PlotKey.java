@@ -12,6 +12,7 @@ public class PlotKey {
     private int X;
     private int Z;
     private UUID worldUUID;
+    private String alphaPlotName;
 
     private PlotKey alphaPlot;
 
@@ -54,6 +55,14 @@ public class PlotKey {
 
     public void setWorldUUID(UUID worldUUID) {
         this.worldUUID = worldUUID;
+    }
+
+    public String getAlphaPlotName() {
+        return alphaPlotName;
+    }
+
+    public void setAlphaPlotName(String alphaPlotName) {
+        this.alphaPlotName = alphaPlotName;
     }
 
     public ArrayList<PlotKey> getNears(Town t){

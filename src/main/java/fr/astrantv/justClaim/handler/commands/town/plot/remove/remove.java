@@ -2,7 +2,6 @@ package fr.astrantv.justClaim.handler.commands.town.plot.remove;
 
 import fr.astrantv.justClaim.Error;
 import fr.astrantv.justClaim.db.*;
-import fr.astrantv.justClaim.handler.Arg;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -38,7 +37,7 @@ public class remove extends SubCommand {
                 t = t.GetTownFromDb();
 
                 if(m.hasTown(t)) {
-                    MemberInTown mInTown = t.getMemberInTown(m);
+                    MemberInTown mInTown = t.GetMemberInTown(m);
 
                     if(mInTown.hasPerm(Role.PERM.PLOT_REMOVE)) {
                         t.removePlotKey(plotKey);

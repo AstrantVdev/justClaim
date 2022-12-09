@@ -1,9 +1,6 @@
 package fr.astrantv.justClaim.handler.commands.town.plot.add;
 import fr.astrantv.justClaim.Error;
-import fr.astrantv.justClaim.db.Member;
-import fr.astrantv.justClaim.db.Plot;
-import fr.astrantv.justClaim.db.PlotKey;
-import fr.astrantv.justClaim.db.Town;
+import fr.astrantv.justClaim.db.*;
 import fr.astrantv.justClaim.handler.Arg;
 import fr.astrantv.justClaim.handler.SubCommand;
 import org.bukkit.Location;
@@ -53,10 +50,15 @@ public class add extends SubCommand {
                 town = town.GetTownFromDb();
 
                 if(plotKey.getNears(town) != null){
-                    town.addPlotKey(plotKey);
-                    town.register();
+                    MemberInTown mInTown = town.GetMemberInTown(m);
 
-                    plot.register();
+                    if(mInTown.hasPerm(Role.PERM.PLOT_ADD)) {
+                        town.addPlotKey(plotKey);
+                        town.register();
+
+                        plot.register();
+
+                    }
 
                 }
 
