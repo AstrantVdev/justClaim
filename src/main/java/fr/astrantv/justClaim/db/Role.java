@@ -55,12 +55,16 @@ public class Role {
         MONEY_REMOVE,
         MEMBER_ADD,
         MEMBER_REMOVE,
+        MEMBER_ROLE_ADD,
+        MEMBER_ROLE_REMOVE,
         ROLE_ADD,
         ROLE_REMOVE,
         RULE_ADD,
         RULE_REMOVE,
         SUBPLOT_ADD,
-        SUBPLOT_REMOVE
+        SUBPLOT_REMOVE,
+        SUBPLOT_RULE_ADD,
+        SUBPLOT_RULE_REMOVE,
 
     }
 
