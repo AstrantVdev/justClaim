@@ -1,7 +1,7 @@
 package fr.astrantv.justClaim.commandHandler.commands.town.plot;
 
-import fr.astrantv.justClaim.commandHandler.commands.town.plot.add.add;
-import fr.astrantv.justClaim.commandHandler.commands.town.plot.remove.remove;
+import fr.astrantv.justClaim.commandHandler.commands.town.plot.addOne.addOne;
+import fr.astrantv.justClaim.commandHandler.commands.town.plot.removeOne.removeOne;
 import org.bukkit.command.CommandSender;
 import fr.astrantv.justClaim.commandHandler.SubCommand;
 
@@ -12,8 +12,8 @@ public class plot extends SubCommand {
         name = "plot";
         desc = "A command to manage a plot";
 
-        subCommands.add(new add(sender));
-        subCommands.add(new remove(sender));
+        subCommands.add(new addOne(sender));
+        subCommands.add(new removeOne(sender));
     }
 
     @Override

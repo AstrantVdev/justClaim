@@ -9,6 +9,10 @@ public class BlockPerm {
     private ArrayList<Material> yes = new ArrayList<>();
     private ArrayList<Material> no = new ArrayList<>();
 
+    public BlockPerm() {
+
+    }
+
     public Boolean getByDefault() {
         return byDefault;
     }

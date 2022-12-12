@@ -1,12 +1,12 @@
-package fr.astrantv.justClaim.commandHandler.commands.town.member.remove;
+package fr.astrantv.justClaim.commandHandler.commands.town.member.removeOne;
 
 import fr.astrantv.justClaim.commandHandler.SubCommand;
 import org.bukkit.command.CommandSender;
 
-public class remove extends SubCommand {
-    public remove(CommandSender sender){
+public class removeOne extends SubCommand {
+    public removeOne(CommandSender sender){
         super(sender);
-        name = "remove";
+        name = "removeOne";
         desc = "A command to remove a Member from a Town";
     }
 

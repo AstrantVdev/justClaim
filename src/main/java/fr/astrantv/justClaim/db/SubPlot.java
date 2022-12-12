@@ -12,7 +12,7 @@ public class SubPlot {
     private ArrayList<Plot> noSubPlots = new ArrayList<>();
     private ArrayList<Location> yesBlocks = new ArrayList<>();
     private ArrayList<Location> noBlocks = new ArrayList<>();
-    private ArrayList<Rule> rules = new ArrayList<>();
+    private ArrayList<String> rulesNames = new ArrayList<>();
 
     public SubPlot(String name, TYPE type) {
         this.name = name;
@@ -59,12 +59,12 @@ public class SubPlot {
         this.noBlocks = noBlocks;
     }
 
-    public ArrayList<Rule> getRules() {
-        return rules;
+    public ArrayList<String> getRulesNames() {
+        return rulesNames;
     }
 
-    public void setRules(ArrayList<Rule> rules) {
-        this.rules = rules;
+    public void setRulesNames(ArrayList<String> rulesNames) {
+        this.rulesNames = rulesNames;
     }
 
     public enum TYPE{

@@ -1,7 +1,7 @@
 package fr.astrantv.justClaim.commandHandler.commands.town.member.role;
 
 import fr.astrantv.justClaim.commandHandler.SubCommand;
-import fr.astrantv.justClaim.commandHandler.commands.town.member.remove.remove;
+import fr.astrantv.justClaim.commandHandler.commands.town.member.removeOne.removeOne;
 import fr.astrantv.justClaim.commandHandler.commands.town.member.role.add.add;
 import org.bukkit.command.CommandSender;
 
@@ -13,7 +13,7 @@ public class role extends SubCommand {
         desc = "A command to manage Roles from a Member";
 
         subCommands.add(new add(sender));
-        subCommands.add(new remove(sender));
+        subCommands.add(new removeOne(sender));
     }
 
     @Override

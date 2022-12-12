@@ -1,11 +1,17 @@
 package fr.astrantv.justClaim.db;
 
+import com.mongodb.client.MongoCollection;
+
+import java.time.Duration;
 import java.util.ArrayList;
+
+import static com.mongodb.client.model.Filters.eq;
+import static fr.astrantv.justClaim.Main.mongoD;
 
 public class Role {
     private String name;
     private int power;
-    private ArrayList<PERM> permissions = new ArrayList<>();
+    private ArrayList<Perm> permissions = new ArrayList<>();
 
     public Role(String name, int power){
         this.name = name.toUpperCase();
@@ -28,43 +34,34 @@ public class Role {
         this.power = power;
     }
 
-    public ArrayList<PERM> getPermissions() {
+    public ArrayList<Perm> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(ArrayList<PERM> permissions) {
+    public void setPermissions(ArrayList<Perm> permissions) {
         this.permissions = permissions;
     }
 
-    public void addPermission(PERM perm){
+    public void addPermission(Perm perm){
         permissions.add(perm);
     }
 
-    public void removePermission(PERM perm){
+    public void removePermission(Perm perm){
         permissions.remove(perm);
     }
 
-    public boolean hasPerm(PERM perm){
-        return permissions.contains(perm);
+    public boolean HasPerm(Perm.PERM perm){
+        for(Perm p : permissions){
+            if(p.getPerm() == perm){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public enum PERM{
-        PLOT_ADD,
-        PLOT_REMOVE,
-        MONEY_ADD,
-        MONEY_REMOVE,
-        MEMBER_ADD,
-        MEMBER_REMOVE,
-        MEMBER_ROLE_ADD,
-        MEMBER_ROLE_REMOVE,
-        ROLE_ADD,
-        ROLE_REMOVE,
-        RULE_ADD,
-        RULE_REMOVE,
-        SUBPLOT_ADD,
-        SUBPLOT_REMOVE,
-        SUBPLOT_RULE_ADD,
-        SUBPLOT_RULE_REMOVE,
+    public Town GetTownFromDb(){
+        MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
+        return towns.find(eq("name",name)).first();
 
     }
 

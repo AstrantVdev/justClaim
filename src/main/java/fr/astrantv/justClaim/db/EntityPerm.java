@@ -5,27 +5,35 @@ import org.bukkit.entity.EntityType;
 import java.util.ArrayList;
 
 public class EntityPerm {
-    private EntityType type;
-    private ArrayList<EntityType> types = new ArrayList<>();
+    private boolean byDefault;
+    private EntityType passiveType;
+    private ArrayList<EntityType> activeTypes = new ArrayList<>();
 
-    public EntityPerm(EntityType type, ArrayList<EntityType> types) {
-        this.type = type;
-        this.types = types;
+    public EntityPerm() {
+
     }
 
-    public EntityType getType() {
-        return type;
+    public boolean getByDefault() {
+        return byDefault;
     }
 
-    public void setType(EntityType type) {
-        this.type = type;
+    public void setByDefault(boolean byDefault) {
+        this.byDefault = byDefault;
     }
 
-    public ArrayList<EntityType> getTypes() {
-        return types;
+    public EntityType getPassiveType() {
+        return passiveType;
     }
 
-    public void setTypes(ArrayList<EntityType> types) {
-        this.types = types;
+    public void setPassiveType(EntityType passiveType) {
+        this.passiveType = passiveType;
+    }
+
+    public ArrayList<EntityType> getActiveTypes() {
+        return activeTypes;
+    }
+
+    public void setActiveTypes(ArrayList<EntityType> activeTypes) {
+        this.activeTypes = activeTypes;
     }
 }

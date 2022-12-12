@@ -1,14 +1,20 @@
 package fr.astrantv.justClaim.commandHandler.commands.town.rule.remove;
 
 import fr.astrantv.justClaim.commandHandler.SubCommand;
-import org.bukkit.command.CommandSender;
+import fr.astrantv.justClaim.commandHandler.commands.town.rule.remove.blockPerm.blockPerm;
+import fr.astrantv.justClaim.commandHandler.commands.town.rule.remove.entityPerm.entityPerm;
+import fr.astrantv.justClaim.commandHandler.commands.town.rule.remove.power.power;
 
 public class remove extends SubCommand {
-
-    public remove(CommandSender sender) {
+    public remove(org.bukkit.command.CommandSender sender) {
         super(sender);
         name = "remove";
-        desc = "A command to remove a Rule from a Town";
+        desc = "A command to remove an item from a Town's Rule's property";
+
+        subCommands.add(new blockPerm(sender));
+        subCommands.add(new entityPerm(sender));
+        subCommands.add(new power(sender));
+
     }
 
     @Override

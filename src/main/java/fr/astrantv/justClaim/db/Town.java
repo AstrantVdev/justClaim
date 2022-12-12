@@ -1,6 +1,8 @@
 package fr.astrantv.justClaim.db;
 
 import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,9 @@ public class Town {
     private ArrayList<Role> roles = new ArrayList<>();
     private ArrayList<SubPlot> subPlots = new ArrayList<>();
     private ArrayList<PlotKey> plotsKeys = new ArrayList<>();
+    @BsonIgnore
+    private MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
+
 
     public Town() {
 
@@ -183,6 +188,7 @@ public class Town {
 
         MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
         towns.insertOne(this);
+
     }
 
     public void unRegister(){
@@ -220,6 +226,33 @@ public class Town {
         return null;
     }
 
+    public Role GetRole(String name){
+        for(Role role : roles){
+            if(role.getName().equals(name)){
+                return role;
+            }
+        }
+        return null;
+    }
+
+    public Rule GetRule(String name){
+        for(Rule rule : rules){
+            if(rule.getName().equals(name)){
+                return rule;
+            }
+        }
+        return null;
+    }
+
+    public PlotKey GetAlphaPlot(String name){
+        for(PlotKey plot : alphaPlots){
+            if(plot.getAlphaPlotName().equals(name)){
+                return plot;
+            }
+        }
+        return null;
+    }
+
     public enum NAMEERROR{
         TOOLONG,
         TOOSHORT,
@@ -249,8 +282,10 @@ public class Town {
 
     public Role leaderRole(){
         Role r = new Role("leader", 64);
-        for(Role.PERM p : Role.PERM.values()){
-            r.addPermission(p);
+        for(Perm.PERM p : Perm.PERM.values()){
+            Perm perm = new Perm(p, 1, 0);
+
+            r.addPermission(perm);
         }
 
         return r;
@@ -258,7 +293,6 @@ public class Town {
     }
 
     public Town GetTownFromDb(){
-        MongoCollection<Town> towns = mongoD.getCollection("towns", Town.class);
         return towns.find(eq("name",name)).first();
     }
 

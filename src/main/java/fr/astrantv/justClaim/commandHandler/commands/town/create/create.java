@@ -38,7 +38,8 @@ public class create extends SubCommand {
 
             if(!plot.IsRegistered()){
                 MemberInTown mInTown = new MemberInTown();
-                mInTown.addRole(town.leaderRole());
+                town.addRole(town.leaderRole());
+                mInTown.addRoleName(town.leaderRole().getName());
                 town.addMemberInTown(mInTown);
                 plotKey.setAlphaPlotName("alpha");
                 town.addAlphaPlot(plotKey);

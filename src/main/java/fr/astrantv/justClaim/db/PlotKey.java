@@ -1,11 +1,13 @@
 package fr.astrantv.justClaim.db;
 
+import com.mongodb.client.MongoCollection;
 import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static fr.astrantv.justClaim.Main.mongoD;
 import static fr.astrantv.justClaim.Main.plugin;
 
 public class PlotKey {

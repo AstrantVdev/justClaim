@@ -1,4 +1,4 @@
-package fr.astrantv.justClaim.commandHandler.commands.town.plot.add;
+package fr.astrantv.justClaim.commandHandler.commands.town.plot.addOne;
 import fr.astrantv.justClaim.Error;
 import fr.astrantv.justClaim.db.*;
 import fr.astrantv.justClaim.commandHandler.Arg;
@@ -7,11 +7,11 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class add extends SubCommand {
+public class addOne extends SubCommand {
 
-    public add(CommandSender sender) {
+    public addOne(CommandSender sender) {
         super(sender);
-        name = "add";
+        name = "addOne";
         desc = "A command to add a plot";
 
         Player p = (Player) sender;
@@ -34,7 +34,8 @@ public class add extends SubCommand {
         Player p = (Player) sender;
         Member m = new Member(p.getUniqueId());
 
-        if(m.getTownsNames() != null){
+        if(m.IsRegistered()){
+            m = m.GetMemberFromDb();
             Location loc = p.getLocation();
             Plot plot = new Plot(loc);
 
@@ -52,7 +53,7 @@ public class add extends SubCommand {
                 if(plotKey.getNears(town) != null){
                     MemberInTown mInTown = town.GetMemberInTown(m);
 
-                    if(mInTown.hasPerm(Role.PERM.PLOT_ADD)) {
+                    if(mInTown.hasPerm(Perm.PERM.PLOT_ADD, town)) {
                         town.addPlotKey(plotKey);
                         town.register();
 

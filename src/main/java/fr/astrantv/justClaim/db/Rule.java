@@ -8,8 +8,8 @@ public class Rule {
     private int inferior;
     private ArrayList<ArrayList<Integer>> yesBetween = new ArrayList<>();
     private ArrayList<ArrayList<Integer>> noBetween = new ArrayList<>();
-    private int yes;
-    private int no;
+    private ArrayList<Integer> yes;
+    private ArrayList<Integer> no;
     private Boolean pvp;
     private BlockPerm build;
     private BlockPerm destroy;
@@ -66,20 +66,44 @@ public class Rule {
         this.noBetween = noBetween;
     }
 
-    public int getYes() {
+    public ArrayList<Integer> getYes() {
         return yes;
     }
 
-    public void setYes(int yes) {
+    public void setYes(ArrayList<Integer> yes) {
         this.yes = yes;
     }
 
-    public int getNo() {
+    public void addYes(int id) {
+        yes.add(id);
+    }
+
+    public void removeYes(int id) {
+        yes.remove(id);
+    }
+
+    public boolean hasYes(int id) {
+        return yes.contains(id);
+    }
+
+    public ArrayList<Integer> getNo() {
         return no;
     }
 
-    public void setNo(int no) {
+    public void setNo(ArrayList<Integer> no) {
         this.no = no;
+    }
+
+    public void addNo(int id) {
+        no.add(id);
+    }
+
+    public void removeNo(int id) {
+        no.remove(id);
+    }
+
+    public boolean hasNo(int id) {
+        return no.contains(id);
     }
 
     public Boolean getPvp() {

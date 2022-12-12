@@ -146,10 +146,10 @@ public class Plot {
     //would make a portion of the town unattached to it.
     public boolean IsBreakingTownIntegrity(){
         Town t = new Town(townName);
-        PlotSection section = t.GetPlotSection(GetPlotKey());
 
-        ArrayList<PlotKey> checkingPlots = section.getPlotsKeys();
-        PlotKey alpha = section.getAlphaPlot();
+        ArrayList<PlotKey> checkingPlots = t.getPlotsKeys();
+        String AlphaPlotName = checkingPlots.get(0).getAlphaPlotName();
+        PlotKey alpha = t.GetAlphaPlot(AlphaPlotName);
 
         checkingPlots = townIntegrityPlots(alpha, checkingPlots);
 
