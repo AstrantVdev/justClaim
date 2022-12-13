@@ -1,5 +1,6 @@
-package fr.astrantv.justClaim;
+package fr.astrantv.justClaim.messageHandler;
 
+import fr.astrantv.justClaim.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

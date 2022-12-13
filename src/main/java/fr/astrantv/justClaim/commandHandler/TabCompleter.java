@@ -50,7 +50,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             if(length <= maxArgsIndex){
                 Arg arg = command.args.get(maxArgsIndex-length);
 
-                ArrayList<String> argChoices = arg.choices;
+                ArrayList<String> argChoices = arg.getChoices();
 
                 Boolean nullChoices = false;
                 if(choices != null){
@@ -61,20 +61,20 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
 
                 }else {
 
-                    switch (arg.type) {
+                    switch (arg.getType()) {
 
                         case INT:
                             try {
                                 int i = Integer.parseInt(args[length - 1]);
 
                                 Boolean valid = true;
-                                if (arg.maxValue != null) {
-                                    if (i > arg.maxValue) {
+                                if (arg.getMaxValue() != null) {
+                                    if (i > arg.getMaxValue()) {
                                         valid = false;
                                     }
                                 }
                                 if (arg.minValue != null) {
-                                    if (i < arg.maxValue) {
+                                    if (i < arg.getMaxValue()) {
                                         valid = false;
                                     }
                                 }

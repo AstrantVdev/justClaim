@@ -10,7 +10,7 @@ public class remove extends SubCommand {
         name = "remove";
         desc = "A command to remove an item from a Town's Role's property";
 
-        subCommands.add(new perm(sender));
+        addSub(new perm(sender));
     }
 
     @Override

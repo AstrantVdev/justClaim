@@ -18,10 +18,8 @@ public class sheep extends SubCommand {
         name = "sheep";
         desc = "Foxy ! Give a colored sheep...";
 
-        Arg colorArg = new Arg();
-        colorArg.required = true;
-        colorArg.choices = new ArrayList<>(EnumSet.allOf(color.COLORS.class));
-        args.add(colorArg);
+        addArg(new Arg("color")
+                .addChoice(EnumSet.allOf(color.COLORS.class)));
 
     }
 

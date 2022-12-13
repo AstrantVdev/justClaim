@@ -1,4 +1,4 @@
-package fr.astrantv.justClaim;
+package fr.astrantv.justClaim.eventHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

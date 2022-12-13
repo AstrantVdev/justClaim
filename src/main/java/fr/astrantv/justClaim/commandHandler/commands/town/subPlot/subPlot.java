@@ -13,9 +13,9 @@ public class subPlot extends SubCommand {
         name = "subPlot";
         desc = "A command to manage SubPlots of a Town";
 
-        subCommands.add(new add(sender));
-        subCommands.add(new remove(sender));
-        subCommands.add(new rule(sender));
+        addSub(new add(sender));
+        addSub(new remove(sender));
+        addSub(new rule(sender));
     }
 
     @Override

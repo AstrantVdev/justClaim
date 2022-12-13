@@ -12,8 +12,8 @@ public class money extends SubCommand {
         name = "money";
         desc = "A command to manage Money in a Town";
 
-        subCommands.add(new add(sender));
-        subCommands.add(new remove(sender));
+        addSub(new add(sender));
+        addSub(new remove(sender));
 
     }
 

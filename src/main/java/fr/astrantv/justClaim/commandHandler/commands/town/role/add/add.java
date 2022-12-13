@@ -10,7 +10,7 @@ public class add extends SubCommand {
         name = "add";
         desc = "A command to add an item to a Town's Role's property";
 
-        subCommands.add(new perm(sender));
+        addSub(new perm(sender));
     }
 
     @Override

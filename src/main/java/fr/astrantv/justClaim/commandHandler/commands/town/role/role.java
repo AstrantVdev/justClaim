@@ -14,11 +14,11 @@ public class role extends SubCommand {
         name = "role";
         desc = "A command to manage Roles of a Town";
 
-        subCommands.add(new addOne(sender));
-        subCommands.add(new removeOne(sender));
-        subCommands.add(new set(sender));
-        subCommands.add(new add(sender));
-        subCommands.add(new remove(sender));
+        addSub(new addOne(sender));
+        addSub(new removeOne(sender));
+        addSub(new set(sender));
+        addSub(new add(sender));
+        addSub(new remove(sender));
 
     }
 

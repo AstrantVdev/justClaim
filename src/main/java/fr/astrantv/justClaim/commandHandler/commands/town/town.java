@@ -13,10 +13,10 @@ public class town extends SubCommand {
         name = "town";
         desc = "A command to manage a Town";
 
-        subCommands.add(new create(sender));
-        subCommands.add(new plot(sender));
-        subCommands.add(new delete(sender));
-        subCommands.add(new money(sender));
+        addSub(new create(sender));
+        addSub(new plot(sender));
+        addSub(new delete(sender));
+        addSub(new money(sender));
 
     }
 

@@ -12,8 +12,8 @@ public class rule extends SubCommand {
         name = "rule";
         desc = "A command to manage the Rules of a SubPlot";
 
-        subCommands.add(new addOne(sender));
-        subCommands.add(new remove(sender));
+        addSub(new addOne(sender));
+        addSub(new remove(sender));
     }
 
     @Override

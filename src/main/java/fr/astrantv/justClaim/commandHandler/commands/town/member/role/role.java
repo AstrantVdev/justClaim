@@ -12,8 +12,8 @@ public class role extends SubCommand {
         name = "role";
         desc = "A command to manage Roles from a Member";
 
-        subCommands.add(new add(sender));
-        subCommands.add(new removeOne(sender));
+        addSub(new add(sender));
+        addSub(new removeOne(sender));
     }
 
     @Override

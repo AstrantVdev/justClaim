@@ -11,8 +11,8 @@ public class entityPerm extends SubCommand {
         name = "entityPerm";
         desc = "A command to remove an item from a Town's Rule entityPerm property";
 
-        subCommands.add(new activeTypeNo(sender));
-        subCommands.add(new activeTypeYes(sender));
+        addSub(new activeTypeNo(sender));
+        addSub(new activeTypeYes(sender));
     }
 
     @Override

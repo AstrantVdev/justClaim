@@ -12,13 +12,12 @@ public class addOne extends SubCommand {
         name = "addOne";
         desc = "A command to add a Member to a Town";
 
-        Arg playerNames = new Arg();
-        playerNames.required = true;
-        playerNames.minChr = 3;
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            playerNames.choices.add(player.getName());
-        });
-        args.add(playerNames);
+        addArg(new Arg("playerNames")
+                .setMinChr(3)
+                .addChoice(Bukkit.getOnlinePlayers()
+                        .stream()
+                        .map(player -> player.getName())
+                        .toArray(String[]::new)));
     }
 
     @Override

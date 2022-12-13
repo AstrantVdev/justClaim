@@ -11,9 +11,9 @@ public class remove extends SubCommand {
         name = "remove";
         desc = "A command to remove an item from a Town's Rule's property";
 
-        subCommands.add(new blockPerm(sender));
-        subCommands.add(new entityPerm(sender));
-        subCommands.add(new power(sender));
+        addSub(new blockPerm(sender));
+        addSub(new entityPerm(sender));
+        addSub(new power(sender));
 
     }
 

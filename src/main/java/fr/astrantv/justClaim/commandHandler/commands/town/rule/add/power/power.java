@@ -14,10 +14,10 @@ public class power extends SubCommand {
         name = "power";
         desc = "A command to add an item to a Town's Rule's Power property";
 
-        subCommands.add(new yes(sender));
-        subCommands.add(new no(sender));
-        subCommands.add(new yesBetween(sender));
-        subCommands.add(new noBetween(sender));
+        addSub(new yes(sender));
+        addSub(new no(sender));
+        addSub(new yesBetween(sender));
+        addSub(new noBetween(sender));
 
     }
 

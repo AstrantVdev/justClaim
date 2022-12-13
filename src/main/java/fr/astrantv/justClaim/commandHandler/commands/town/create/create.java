@@ -1,6 +1,6 @@
 package fr.astrantv.justClaim.commandHandler.commands.town.create;
 
-import fr.astrantv.justClaim.Error;
+import fr.astrantv.justClaim.messageHandler.Error;
 import fr.astrantv.justClaim.db.*;
 import fr.astrantv.justClaim.commandHandler.Arg;
 import fr.astrantv.justClaim.commandHandler.SubCommand;
@@ -17,11 +17,9 @@ public class create extends SubCommand {
         desc = "A command to create a town";
         playerOnly = true;
 
-        Arg town = new Arg();
-        town.minChr = 2;
-        town.maxChr = 32;
-        town.required = true;
-        args.add(town);
+        addArg(new Arg("town")
+                .setMinChr(2)
+                .setMaxChr(20));
 
     }
 

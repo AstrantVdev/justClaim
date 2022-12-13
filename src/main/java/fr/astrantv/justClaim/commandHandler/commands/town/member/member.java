@@ -13,9 +13,9 @@ public class member extends SubCommand {
             name = "member";
             desc = "A command to manage the Members of a Town";
 
-            subCommands.add(new addOne(sender));
-            subCommands.add(new removeOne(sender));
-            subCommands.add(new role(sender));
+            addSub(new addOne(sender));
+            addSub(new removeOne(sender));
+            addSub(new role(sender));
         }
 
         @Override

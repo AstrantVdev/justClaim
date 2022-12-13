@@ -13,11 +13,11 @@ public class rule extends SubCommand {
         name = "rule";
         desc = "A command to manage the Rules of a Town";
 
-        subCommands.add(new addOne(sender));
-        subCommands.add(new removeOne(sender));
-        subCommands.add(new set(sender));
-        subCommands.add(new addOne(sender));
-        subCommands.add(new removeOne(sender));
+        addSub(new addOne(sender));
+        addSub(new removeOne(sender));
+        addSub(new set(sender));
+        addSub(new addOne(sender));
+        addSub(new removeOne(sender));
     }
 
     @Override

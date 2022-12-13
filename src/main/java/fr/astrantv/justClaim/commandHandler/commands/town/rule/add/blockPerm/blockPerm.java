@@ -12,8 +12,8 @@ public class blockPerm extends SubCommand {
         name = "blockPerm";
         desc = "A command to add an item to a Town's Rule's BlockPerm property";
 
-        subCommands.add(new yes(sender));
-        subCommands.add(new no(sender));
+        addSub(new yes(sender));
+        addSub(new no(sender));
     }
 
     @Override

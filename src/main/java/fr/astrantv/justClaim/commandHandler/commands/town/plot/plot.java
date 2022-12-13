@@ -12,8 +12,8 @@ public class plot extends SubCommand {
         name = "plot";
         desc = "A command to manage a plot";
 
-        subCommands.add(new addOne(sender));
-        subCommands.add(new removeOne(sender));
+        addSub(new addOne(sender));
+        addSub(new removeOne(sender));
     }
 
     @Override

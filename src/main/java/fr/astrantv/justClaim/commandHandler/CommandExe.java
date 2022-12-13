@@ -51,17 +51,17 @@ public class CommandExe {
 
             }catch(Exception e){
 
-                if(arg.required){
+                if(arg.isRequired()){
                     valid = false;
 
                 }
 
             }
 
-            if(arg.choices.size() > 0){
+            if(arg.getChoices().size() > 0){
 
                 boolean isChoice = false;
-                for(Object choice : arg.choices){
+                for(Object choice : arg.getChoices()){
 
                     if(choice.toString().equalsIgnoreCase(sendArg)){
                         isChoice = true;
@@ -77,15 +77,15 @@ public class CommandExe {
 
             }
 
-            switch (arg.type){
+            switch (arg.getType()){
                 case INT:
 
                     try {
                         int argInt = Integer.parseInt(sendArg);
 
-                        if(arg.minValue != null){
+                        if(arg.getMinValue() != null){
 
-                            if(argInt < arg.minChr){
+                            if(argInt < arg.getMinChr()){
                                 valid = false;
 
                             }
@@ -94,7 +94,7 @@ public class CommandExe {
 
                         if(arg.minValue != null){
 
-                            if(argInt > arg.minChr){
+                            if(argInt > arg.getMinChr()){
                                 valid = false;
 
                             }
@@ -109,18 +109,18 @@ public class CommandExe {
 
                 case STRING:
 
-                    if(arg.minChr != null){
+                    if(arg.getMinChr() != null){
 
-                        if(sendArg.length() < arg.minChr){
+                        if(sendArg.length() < arg.getMinChr()){
                             valid = false;
 
                         }
 
                     }
 
-                    if(arg.maxChr != null){
+                    if(arg.getMaxChr() != null){
 
-                        if(sendArg.length() > arg.maxChr){
+                        if(sendArg.length() > arg.getMaxChr()){
                             valid = false;
 
                         }

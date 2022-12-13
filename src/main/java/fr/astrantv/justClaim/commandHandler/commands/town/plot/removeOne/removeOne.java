@@ -1,6 +1,6 @@
 package fr.astrantv.justClaim.commandHandler.commands.town.plot.removeOne;
 
-import fr.astrantv.justClaim.Error;
+import fr.astrantv.justClaim.messageHandler.Error;
 import fr.astrantv.justClaim.db.*;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;

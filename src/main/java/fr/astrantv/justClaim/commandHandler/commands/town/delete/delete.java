@@ -1,10 +1,8 @@
 package fr.astrantv.justClaim.commandHandler.commands.town.delete;
 
-import fr.astrantv.justClaim.Error;
 import fr.astrantv.justClaim.commandHandler.Arg;
 import fr.astrantv.justClaim.commandHandler.SubCommand;
 import fr.astrantv.justClaim.db.*;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -19,12 +17,11 @@ public class delete extends SubCommand {
         Member m = new Member(p.getUniqueId());
 
         if(m.getTownsNames() != null){
-            Arg town = new Arg();
-            town.minChr = 2;
-            town.maxChr = 32;
-            town.required = false;
-            town.choices = m.GetTowns();
-            args.add(town);
+
+            addArg(new Arg("town")
+                    .setMinChr(2)
+                    .setMaxChr(20)
+                    .addChoice(m.getTownsNames()));
 
         }
     }

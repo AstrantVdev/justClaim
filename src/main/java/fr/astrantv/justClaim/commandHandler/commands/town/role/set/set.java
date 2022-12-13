@@ -11,8 +11,8 @@ public class set extends SubCommand {
         name = "set";
         desc = "A command to set a Town's Role property";
 
-        subCommands.add(new limit(sender));
-        subCommands.add(new limitDuration(sender));
+        addSub(new limit(sender));
+        addSub(new limitDuration(sender));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package fr.astrantv.justClaim;
+package fr.astrantv.justClaim.eventHandler;
 
 import fr.astrantv.justClaim.db.Member;
 import fr.astrantv.justClaim.db.Plot;
